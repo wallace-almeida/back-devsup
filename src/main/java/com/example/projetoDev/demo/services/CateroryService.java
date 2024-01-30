@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,4 +31,12 @@ public class CateroryService {
         Category entity = obj.orElseThrow(() -> new EntityNotFoundException("Entity Not Found"));
         return new categoryDTO(entity);   
     }
+
+    public categoryDTO insert(categoryDTO dto) {
+        Category entity = new Category();
+        entity.setNome(dto.getNome());
+        entity = repository.save(entity);
+        return new categoryDTO(entity);
+    }
+    
 }
